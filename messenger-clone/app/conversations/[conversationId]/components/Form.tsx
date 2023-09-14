@@ -21,6 +21,7 @@ const Form = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    // Re-renders the component once submitted as new
     setValue("message", "", { shouldValidate: true });
 
     axios.post("/api/messages", {

@@ -5,7 +5,7 @@ import { FullMessageType } from "@/app/types";
 import clsx from "clsx";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
-import Image from "next/image"
+import Image from "next/image";
 
 interface MessageBoxProps {
   data: FullMessageType;
@@ -48,16 +48,21 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, isLast }) => {
           </div>
         </div>
         <div className={message}>
-            {data.image ? (
-                <Image
-                    alt="Image"
-                    height="288"
-                    width="288"
-                    src={data.image}
-                    className=""
-                />
-            )}
+          {data.image ? (
+            <Image
+              alt="Image"
+              height="288"
+              width="288"
+              src={data.image}
+              className=""
+            />
+          ) : (
+            <div>{data.body}</div>
+          )}
         </div>
+        {isLast && isOwn && seenList.length > 0 && (
+          <div className="text-xs font-light text-gray-500">{`Seen by ${seenList}`}</div>
+        )}
       </div>
     </div>
   );
